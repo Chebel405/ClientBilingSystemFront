@@ -39,21 +39,31 @@
   margin-top: 70px;
 }
 
-
 .mini-tableau {
   padding: 1rem;
   margin: 1rem;
   border: 1px solid #ccc;
   border-radius: 0.5rem;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  height: 200px; 
+ 
 }
 
-/* Ajout d'une règle pour rendre le tableau responsive */
+
 @media only screen and (max-width: 768px) {
   .mini-tableau {
     height: auto;
     margin-bottom: 20px;
     flex-basis: calc(50% - 20px);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .mini-tableau {
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    
   }
 }
 
@@ -85,9 +95,71 @@ button.supprimer {
   margin-right: 5px;
 }
 
-/* Positionnement des boutons Modifier et Supprimer */
 .boutons-modifier-supprimer {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 0;
+  left: 50%;
+  margin: 10px;
+  transform: translateX(-50%);
 }
+
+@media only screen and (max-width: 480px) {
+  .boutons-modifier-supprimer {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .boutons-modifier-supprimer button {
+    margin-right: 10px;
+  }
+
+
+ 
+
+  
+  
+}
+
+td {
+  max-width: 200px;
+  word-wrap: break-word;
+}
+
+.mini-tableau table td span {
+  cursor: pointer;
+  color: #000000;
+}
+
+.mini-tableau table td input {
+  width: 100%;
+  border: 1px solid black;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 2px;
+}
+
+.mini-tableau button {
+  background-color: #7F7CAF;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.mini-tableau button:hover {
+  background-color: #7F7CAF;
+}
+
+.edit-form {
+  max-width: 300px; /* La même largeur que le mini-tableau */
+}
+
+.edit-buttons button:first-child {
+  margin-right: 10px; /* Ajout de marge à droite du bouton "Sauvegarder" */
+}
+
+
+

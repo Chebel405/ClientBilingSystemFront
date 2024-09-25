@@ -7,9 +7,7 @@ import { Client } from 'src/app/models/client'; // Importation de la classe Clie
   providedIn: 'root' // Spécifie que le service sera injecté au niveau de la racine de l'application
 })
 export class ClientService {
-// ajouterClient(newClient: Client) {
-//  throw new Error('Method not implemented');
-//}
+
 
   private apiURL = 'http://localhost:8081/utilisateurs'
 
@@ -30,6 +28,11 @@ export class ClientService {
   deleteClient(id: number): Observable<any> {
     const url = `${this.apiURL}/${id}`; // Construction de l'URL de l'API avec l'identifiant du client à supprimer
     return this.http.delete(url); // Effectue une requête HTTP de type DELETE sur l'URL de l'API pour supprimer le client correspondant
+  }
+
+  updateClient(client: Client, id:number): Observable<Client> {
+    const url = `${this.apiURL}/${id}`;
+    return this.http.put<Client>(url, client);
   }
 }
 

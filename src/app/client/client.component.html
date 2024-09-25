@@ -1,79 +1,63 @@
 <header class="barre-violette">
-  <h1 class="clients">CLIENT</h1>
-  
+  <h1 class="clients">CLIENTS</h1>
+
   <button (click)="showForm()">Ajouter client</button>
   <div *ngIf="showAddForm">
-    <form>
+    <form [formGroup]="clientForm"  (ngSubmit)="addClient()">
       <label for="nom">Nom :</label>
-      <input type="text" id="nom">
-
+      <input type="text" id="name" formControlName="nom"  name="name" style="margin-top: 10px;" />
       <label for="prenom">Prénom :</label>
-      <input type="text" id="prenom">
-
-      <label for="email">E-mail :</label>
-      <input type="email" id="email">
-
+      <input type="text" id="username" formControlName="prenom" name="username" style="margin-top: 10px;" />
       <button type="submit">Ajouter</button>
     </form>
   </div>
-  
 </header>
 
 <div class="tableau-container">
-  <ng-container *ngFor="let client of clients; let i = index">
-    <div class="mini-tableau" *ngIf="i < 9">
-      <table>
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>nom</th>
-            <th>prenom</th>
-            <th>fonction</th>
-            <th>role</th>
-            <!-- <th>portable</th>
-            <th>mail</th>
-            <th>societe</th>
-            <th>codeActivite</th>
-            <th>adresse</th>
-            <th>codePostal</th>
-            <th>ville</th>
-            <th>note</th> -->
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ client.id }}</td>
-            <td>{{ client.nom }}</td>
-            <td>{{ client.prenom }}</td>
-            <td>{{ client.fonction }}</td>
-            <td>{{ client.role }}</td>
-            <!-- <td>{{ client.portable }}</td>
-            <td>{{ client.mail }}</td>
-            <td>{{ client.societe }}</td>
-            <td>{{ client.codeActivite }}</td>
-            <td>{{ client.adresse }}</td>
-            <td>{{ client.codePostal }}</td>
-            <td>{{ client.ville }}</td>
-            <td>{{ client.note }}</td> -->
-
+  <div *ngFor="let client of clients; let i = index">
+    <ng-container *ngIf="i < 9">
+      <div class="mini-tableau">
+        <table>
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="!client.editMode">
+              <tr>
+                <td>{{ client.nom }}</td>
+                <td>{{ client.prenom }}</td>
+                <td><button class="modifier" (click)="showForm(client)">Modifier</button></td>
+                <td><button class="supprimer" (click)="deleteClient(client)" *ngIf="!client.editMode">Supprimer</button></td>
+              </tr>
+            </ng-container>
+            <div *ngIf="client.editMode">
+                <form [formGroup]="clientForm" (ngSubmit)="updateClient(client.id)">
+              <tr>
+                <td><input type="text" formControlName="nom" /></td>
+                <td><input type="text" formControlName="prenom"/></td>
+                <td></td>
+                <td></td>
+              </tr>
+            <button class="sauvegarder" type="s
+                        ">Sauvegarder</button>
             
-          </tr>
-        </tbody>
-      </table>
-      <div class="boutons">
-        <button class="modifier">Modifier</button>
-        <button class="supprimer">Supprimer</button>
+            <button class="annuler" (click)="client.editMode = false">Annuler</button>
+              </form>
+            
+            </div>
+          </tbody>
+        </table>
+    
       </div>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
+  <div style="clear:both;"></div>
 </div>
-
-
-
-
-
-
-
 
 
 

@@ -3,15 +3,27 @@
   background-color: #E7E7F4;
   padding: 20px;
   height: 100%;
-  width: 220px;
+  width: px;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 70px;
   bottom: 0;
   display: flex;
   flex-direction: column;
+}
+
+.logo-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
   justify-content: center;
 }
+
+.logo {
+  max-width: 150px;
+  /* Ajustement de la taille du logo */
+  height: auto;
+}
+
 
 /* Menu */
 nav {
@@ -19,7 +31,6 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
 }
 
 nav ul {
@@ -64,15 +75,16 @@ nav li:not(:first-child) {
 /* Main */
 main {
   margin-left: 240px;
+  margin-top: 70px;
   padding: 20px;
 }
 
-/* Styles pour la bande verticale violette */
 .bande-verticale {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 10px;
+  top: 70px;
+  left: 220px;
+  width: 8px;
+  /* modification de la largeur de la barre */
   height: calc(100% - 70px);
   background-color: #7F7CAF;
 }
@@ -86,51 +98,14 @@ header {
   background-color: #E7E7F4;
   position: fixed;
   top: 0;
-  left: 220px;
+  left: 0;
   right: 0;
   z-index: 1;
+  /* Ajout de la propriété z-index pour la superposition */
 }
 
-/* Centrer le texte du header */
-h1 {
-  text-align: center;
-  font-family: "Norwester", sans-serif;
-}
-
-/* Responsive design pour les petits écrans */
-@media only screen and (max-width: 767px) {
-
-  /* Barre latérale */
-  .barre-laterale {
-    width: 100%;
-    padding: 20px 10px; /* Réduire l'espacement intérieur */
-    height: auto; /* Supprimer la hauteur fixe */
-    position: relative; /* Modifier la position pour s'adapter au flux */
-  }
-
-  /* Menu */
-  nav {
-    height: auto; /* Supprimer la hauteur fixe */
-    padding-bottom: 20px; /* Ajouter un peu d'espace en bas */
-  }
-
-  nav li {
-    margin-bottom: 20px; /* Réduire l'espacement entre les éléments */
-  }
-
-  /* Positionnement et espacement des boutons */
-  nav li:first-child {
-    margin-top: 20px; /* Réduire la marge supérieure */
-  }
-
-  nav li:not(:first-child) {
-    margin-top: 10px; /* Réduire la marge supérieure */
-  }
-
-  /* Main */
-  main {
-    margin: 0; /* Supprimer la marge à gauche */
-  }
-
- 
+.btn-violet {
+  /* ... */
+  margin-bottom: -20px;
+  /* ajuster la valeur en fonction de la distance à laquelle vous souhaitez remonter les boutons */
 }
