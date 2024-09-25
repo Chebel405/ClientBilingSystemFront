@@ -85,6 +85,7 @@ addClient() {
   this.clientService.addClient(this.clientForm?.value).subscribe((client: Client) => {
       console.log(client);
       this.showAddForm = false;
+      this.clients.push(client);
   });
 }
 
