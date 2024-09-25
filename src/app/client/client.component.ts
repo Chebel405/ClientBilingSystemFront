@@ -14,11 +14,20 @@ export class ClientComponent implements OnInit {
   showAddForm: boolean = false;
   clientForm!: FormGroup;
 
+  /**
+   * Constructeur du composant ClientComponent.
+   *
+   * @param clientService Service pour gérer les opérations liées aux clients.
+   * @param fb FormBuilder pour créer des formulaires réactifs.
+   */
   constructor(private clientService: ClientService, private fb: FormBuilder) { 
     this.createForm();
-  } // Injection du service ClientService dans le constructeur
+  } 
 
 
+   /**
+   * Crée le formulaire réactif pour l'ajout et la modification des clients.
+   */
   createForm() {
     this.clientForm = this.fb.group({
         nom: ['', Validators.required],
@@ -26,19 +35,34 @@ export class ClientComponent implements OnInit {
     });
 }
 
+
+   /**
+   * Méthode exécutée lors de l'initialisation du composant.
+   *
+   * Elle récupère la liste des clients via le service.
+   */
   ngOnInit(): void  {
-   // this.getClients(); // Appel de la méthode getClients() lors de l'initialisation du composant
-   this.getClients();
+   this.getClients(); // Appel de la méthode getClients() lors de l'initialisation du composant
     
   }
   
-
+  /**
+   * Récupère la liste des clients depuis le service.
+   * Met à jour la variable clients avec les données reçues.
+   */
  getClients() {
   this.clientService.getClients().subscribe((data: Client[]) => {
       this.clients = data;
   });
 }
 
+
+  /**
+   * Affiche ou masque le formulaire d'ajout de client.
+   * Si un client est passé en paramètre, le formulaire est prérempli avec ses informations.
+   *
+   * @param client Client à modifier (optionnel).
+   */
 showForm(client?: Client) {
   if (client) {
     // Initialiser le formulaire avec les valeurs actuelles du client
@@ -54,6 +78,9 @@ showForm(client?: Client) {
 }
 
 
+  /**
+     * Ajoute un nouveau client en utilisant les données du formulaire.
+     */
 addClient() {
   this.clientService.addClient(this.clientForm?.value).subscribe((client: Client) => {
       console.log(client);
@@ -61,6 +88,12 @@ addClient() {
   });
 }
 
+
+/**
+   * Supprime un client spécifié.
+   *
+   * @param client Client à supprimer.
+   */
 deleteClient(client: Client) {
   this.clientService.deleteClient(client.id as unknown as number).subscribe(() => {
       console.log(`Client ${client.id} deleted`);
@@ -71,6 +104,12 @@ deleteClient(client: Client) {
   });
 }
 
+
+/**
+   * Met à jour les informations d'un client existant.
+   *
+   * @param id Identifiant du client à mettre à jour.
+   */
 updateClient(id: number) {
   this.clientService.updateClient(this.clientForm.value, id).subscribe(() => {
       console.log(`Client ${id} updated`);
