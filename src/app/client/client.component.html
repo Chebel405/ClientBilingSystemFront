@@ -6,8 +6,18 @@
     <form [formGroup]="clientForm"  (ngSubmit)="addClient()">
       <label for="nom">Nom :</label>
       <input type="text" id="name" formControlName="nom"  name="name" style="margin-top: 10px;" />
+
       <label for="prenom">Prénom :</label>
       <input type="text" id="username" formControlName="prenom" name="username" style="margin-top: 10px;" />
+
+      <label for="fonction">Fonction :</label>
+      <input type="text" id="fonction" formControlName="fonction" name="fonction" style="margin-top: 10px;" />
+
+      <label for="mail">Mail :</label>
+      <input type="mail" id="mail" formControlName="mail" name="mail" style="margin-top: 10px;" />
+
+      <label for="adresse">Adresse :</label>
+      <input type="text" id="adresse" formControlName="adresse" name="adresse" style="margin-top: 10px;" />
       <button type="submit">Ajouter</button>
     </form>
   </div>
@@ -17,111 +27,62 @@
   <div *ngFor="let client of clients; let i = index">
     <ng-container *ngIf="i < 9">
       <div class="mini-tableau">
-        <table>
-          <thead>
-            <tr>
-              <th>Nom</th>
-              <th>Prénom</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngIf="!client.editMode">
-              <tr>
-                <td>{{ client.nom }}</td>
-                <td>{{ client.prenom }}</td>
-                <td><button class="modifier" (click)="showForm(client)">Modifier</button></td>
-                <td><button class="supprimer" (click)="deleteClient(client)" *ngIf="!client.editMode">Supprimer</button></td>
-              </tr>
-            </ng-container>
+        <div class="client-info">
+          <div class="client-attribut">
+            <label>Nom :</label>
+            <span *ngIf="!client.editMode">{{ client.nom }}</span>
             <div *ngIf="client.editMode">
-                <form [formGroup]="clientForm" (ngSubmit)="updateClient(client.id)">
-              <tr>
-                <td><input type="text" formControlName="nom" /></td>
-                <td><input type="text" formControlName="prenom"/></td>
-                <td></td>
-                <td></td>
-              </tr>
-            <button class="sauvegarder" type="s
-                        ">Sauvegarder</button>
-            
-            <button class="annuler" (click)="client.editMode = false">Annuler</button>
+              <form [formGroup]="clientForm">
+                <input type="text" formControlName="nom" />
               </form>
-            
             </div>
-          </tbody>
-        </table>
-    
+          </div>
+          <div class="client-attribut">
+            <label>Prénom :</label>
+            <span *ngIf="!client.editMode">{{ client.prenom }}</span>
+              <div *ngIf="client.editMode">
+                <form [formGroup]="clientForm">
+                  <input type="text" formControlName="prenom"/>
+                </form>
+              </div>
+            </div>
+
+          <div class="client-attribut">
+            <label>Fonction :</label>
+            <span *ngIf="!client.editMode">{{ client.fonction }}</span>
+            <div *ngIf="client.editMode">
+              <form [formGroup]="clientForm">
+                <input type="text" formControlName="fonction" />
+              </form>
+            </div>
+          </div>
+          <div class="client-attribut">
+            <label>Mail :</label>
+            <span *ngIf="!client.editMode">{{ client.mail }}</span>
+            <div *ngIf="client.editMode">
+              <form [formGroup]="clientForm">
+                <input type="email" formControlName="mail" />
+              </form>
+            </div>
+          </div>
+          <div class="client-attribut">
+            <label>Adresse :</label>
+            <span *ngIf="!client.editMode">{{ client.adresse }}</span>
+            <div *ngIf="client.editMode">
+              <form [formGroup]="clientForm">
+                <input type="text" formControlName="adresse" />
+              </form>
+            </div>
+          </div>
+          <div class="client-actions">
+            <button class="modifier" (click)="showForm(client)" *ngIf="!client.editMode">Modifier</button>
+            <button class="supprimer" (click)="deleteClient(client)" *ngIf="!client.editMode">Supprimer</button>
+            <button class="sauvegarder" (click)="updateClient(client.id)" *ngIf="client.editMode">Sauvegarder</button>
+            <button class="annuler" (click)="cancelEdit(client)" *ngIf="client.editMode">Annuler</button>
+          </div>
+        </div>
       </div>
     </ng-container>
   </div>
-  <div style="clear:both;"></div>
 </div>
 
-
-
-
-
-
-
-
-
-
-<!-- 
-<header class="barre-violette">
-<h1 class="clients">CLIENT</h1>
-<button (click)="showForm()">Ajouter client</button>
-<div *ngIf="showAddForm">
-<form>
-  <label for="nom">Nom :</label>
-  <input type="text" id="nom">
-  <label for="prenom">Prénom :</label>
-  <input type="text" id="prenom">
-  <label for="email">E-mail :</label>
-  <input type="email" id="email">
-  <button type="submit">Ajouter</button>
- </form>
-</div>
-
-</header>
-
-
-
-
-<div class="tableau-container">
-<ng-container *ngFor="let client of clients; let i = index">
-  <div class="mini-tableau" *ngIf="i < 9">
-  <table>
-    <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Email</th>
-          <th>Site</th>
- <th></th>
- <th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{{ client.name }}</td>
-<td>{{ client.username }}</td>
- <td>{{ client.email }}</td>
-<td>{{ client.website }}</td>
-</tr>
-</tbody>
-</table>
-<div class="boutons">
-<button class="modifier">Modifier</button>
-<button class="supprimer">Supprimer</button>
-</div>
-</div>
-</ng-container>
-
-</div>
-
-
-
-
- -->

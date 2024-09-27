@@ -31,7 +31,10 @@ export class ClientComponent implements OnInit {
   createForm() {
     this.clientForm = this.fb.group({
         nom: ['', Validators.required],
-        prenom: ['', Validators.required]
+        prenom: ['', Validators.required],
+        fonction: ['', Validators.required], // Ajout du champ entreprise
+        mail: ['', [Validators.required, Validators.email]], // Exemple d'un champ supplémentaire
+        adresse: ['', Validators.required]
     });
 }
 
@@ -65,10 +68,12 @@ export class ClientComponent implements OnInit {
    */
 showForm(client?: Client) {
   if (client) {
-    // Initialiser le formulaire avec les valeurs actuelles du client
     this.clientForm.patchValue({
       nom: client.nom,
-      prenom: client.prenom
+      prenom: client.prenom,
+      fonction: client.fonction,
+      mail: client.mail,
+      adresse: client.adresse
     });
     client.editMode = true; // Activer le mode édition pour le client sélectionné
   } else {
@@ -82,7 +87,7 @@ showForm(client?: Client) {
      * Ajoute un nouveau client en utilisant les données du formulaire.
      */
 addClient() {
-  this.clientService.addClient(this.clientForm?.value).subscribe((client: Client) => {
+  this.clientService.addClient(this.clientForm.value).subscribe((client: Client) => {
       console.log(client);
       this.showAddForm = false;
       this.clients.push(client);
@@ -112,15 +117,21 @@ deleteClient(client: Client) {
    * @param id Identifiant du client à mettre à jour.
    */
 updateClient(id: number) {
-  this.clientService.updateClient(this.clientForm.value, id).subscribe(() => {
+  const clientToUpdate = this.clients.find(client => client.id === id);
+  if (clientToUpdate) {
+    this.clientService.updateClient(this.clientForm.value, id).subscribe(() => {
       console.log(`Client ${id} updated`);
-      // Mettre à jour le client dans la liste des clients
-      const index = this.clients.findIndex((client) => client.id === id);
-      this.clients[index] = this.clientForm.value;
-      this.clientForm.reset();
-      // Masquer les boutons d'édition
-      //client.editMode = false;
-  });
+      Object.assign(clientToUpdate, this.clientForm.value);
+      clientToUpdate.editMode = false; // Quitter le mode édition
+      this.clientForm.reset(); // Réinitialiser le formulaire
+    });
+  }
+}
+
+
+cancelEdit(client: Client) {
+  client.editMode = false; // Annuler l'édition
+  this.clientForm.reset(); // Réinitialiser le formulaire
 }
 
 }
