@@ -11,63 +11,166 @@
     <button class="button button-to-pay">À payer</button>
   </div>
   
- <!--J'AI MODIFIE CE QUI EST EN COMMENTAIRE
-J AI UNIQUEMMENT RECUPERE CE QUE TU AVAIS MIS POUR CLIENT ET AJOUTE ENTREPRISE à la place de CLIENT
-ET AJOUTE LES ATTRIBUTS DU BACK ;) --> 
-  
-
   <h2>Liste des entreprises</h2>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Siret</th>
-        <th>siren</th>
-        <th>ape</th>
-        <!-- <th>numeroTva</th> -->
-        <th>adresse</th>
-        <th>codePostal</th>
-        <th>commune</th>
-        <th>portable</th>
-        <th>raisonSocial</th>
-        <th>siege</th>
-        <th>rcs</th>
-        <th>cfe</th>
-        <th>codeActivite</th>
-        <th>mail</th>
-        <!-- <th>site</th>
-        <th>note</th> -->
-      
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let entreprise of entreprises">
-        <td>{{ entreprise.siret}}</td>
-        <td>{{ entreprise.siren }}</td>
-        <td>{{ entreprise.ape }}</td>
-        <!-- <td>{{ entreprise.numeroTva }}</td> -->
-        <td>{{ entreprise.adresse}}</td>
-        <td>{{ entreprise.codePostal }}</td>
-        <td>{{ entreprise.commune }}</td>
-        <td>{{ entreprise.portable }}</td>
-        <td>{{ entreprise.raisonSocial}}</td>
-        <td>{{ entreprise.siege }}</td>
-        <td>{{ entreprise.rcs }}</td>
-        <td>{{ entreprise.cfe }}</td>
-        <td>{{ entreprise.codeActivite}}</td>
-        <td>{{ entreprise.mail }}</td>
-        <!-- <td>{{ entreprise.site }}</td>
-        <td>{{ entreprise.note }}</td> -->
-        
-          <button>Modifier</button>
-          <button>Supprimer</button>
-       
-      </tr>
-    </tbody>
-  </table>
+  <div class="tableau-container">
+    <div *ngFor="let entreprise of entreprises; let i = index">
+      <ng-container *ngIf="i < 9">
+        <div class="mini-tableau">
+          <div class="entreprise-info">
+            <div class="entreprise-attribut">
+              <label>Siret :</label>
+              <span *ngIf="!entreprise.editMode">{{ entreprise.siret }}</span>
+              <div *ngIf="entreprise.editMode">
+                <form [formGroup]="entrepriseForm">
+                  <input type="text" formControlName="siret" />
+                </form>
+              </div>
+            </div>
+            <div class="entreprise-attribut">
+              <label>Siren :</label>
+              <span *ngIf="!entreprise.editMode">{{ entreprise.siren }}</span>
+                <div *ngIf="entreprise.editMode">
+                  <form [formGroup]="entrepriseForm">
+                    <input type="text" formControlName="siren"/>
+                  </form>
+                </div>
+              </div>
   
-  
-  
-
-    
-  
+            <div class="entreprise-attribut">
+              <label>Ape :</label>
+              <span *ngIf="!entreprise.editMode">{{ entreprise.ape }}</span>
+              <div *ngIf="entreprise.editMode">
+                <form [formGroup]="entrepriseForm">
+                  <input type="text" formControlName="ape" />
+                </form>
+              </div>
+            </div>
+            <div class="entreprise-attribut">
+              <label>Numéros TVA :</label>
+              <span *ngIf="!entreprise.editMode">{{ entreprise.numeroTva }}</span>
+              <div *ngIf="entreprise.editMode">
+                <form [formGroup]="entrepriseForm">
+                  <input type="text" formControlName="numeroTva" />
+                </form>
+              </div>
+            </div>
+            <div class="entreprise-attribut">
+              <label>Adresse :</label>
+              <span *ngIf="!entreprise.editMode">{{ entreprise.adresse }}</span>
+              <div *ngIf="entreprise.editMode">
+                <form [formGroup]="entrepriseForm">
+                  <input type="text" formControlName="adresse" />
+                </form>
+              </div>
+            </div>
+              <div class="entreprise-attribut">
+                <label>Code postal :</label>
+                <span *ngIf="!entreprise.editMode">{{ entreprise.codePostal }}</span>
+                <div *ngIf="entreprise.editMode">
+                  <form [formGroup]="entrepriseForm">
+                    <input type="text" formControlName="codePostal" />
+                  </form>
+                </div>
+              </div>
+              <div class="entreprise-attribut">
+                <label>Commune :</label>
+                <span *ngIf="!entreprise.editMode">{{ entreprise.commune }}</span>
+                <div *ngIf="entreprise.editMode">
+                  <form [formGroup]="entrepriseForm">
+                    <input type="text" formControlName="commune" />
+                  </form>
+                </div>
+              </div>
+              <div class="entreprise-attribut">
+                <label>Portable :</label>
+                <span *ngIf="!entreprise.editMode">{{ entreprise.portable }}</span>
+                <div *ngIf="entreprise.editMode">
+                  <form [formGroup]="entrepriseForm">
+                    <input type="text" formControlName="portable" />
+                  </form>
+                </div>
+              </div>
+              <div class="entreprise-attribut">
+                <label>Raison social :</label>
+                <span *ngIf="!entreprise.editMode">{{ entreprise.raisonSocial }}</span>
+                <div *ngIf="entreprise.editMode">
+                  <form [formGroup]="entrepriseForm">
+                    <input type="text" formControlName="raisonSocial" />
+                  </form>
+                </div>
+              </div>
+              <div class="entreprise-attribut">
+                <label>Siege :</label>
+                <span *ngIf="!entreprise.editMode">{{ entreprise.siege }}</span>
+                <div *ngIf="entreprise.editMode">
+                  <form [formGroup]="entrepriseForm">
+                    <input type="text" formControlName="siege" />
+                  </form>
+                </div>
+              </div>
+              <div class="entreprise-attribut">
+                <label>RCS :</label>
+                <span *ngIf="!entreprise.editMode">{{ entreprise.rcs }}</span>
+                <div *ngIf="entreprise.editMode">
+                  <form [formGroup]="entrepriseForm">
+                    <input type="text" formControlName="rcs" />
+                  </form>
+                </div>
+              </div>
+              <div class="entreprise-attribut">
+                <label>CFE :</label>
+                <span *ngIf="!entreprise.editMode">{{ entreprise.cfe }}</span>
+                <div *ngIf="entreprise.editMode">
+                  <form [formGroup]="entrepriseForm">
+                    <input type="text" formControlName="cfe" />
+                  </form>
+                </div>
+              </div>
+              <div class="entreprise-attribut">
+                <label>Code activité :</label>
+                <span *ngIf="!entreprise.editMode">{{ entreprise.codeActivite }}</span>
+                <div *ngIf="entreprise.editMode">
+                  <form [formGroup]="entrepriseForm">
+                    <input type="text" formControlName="codeActivite" />
+                  </form>
+                </div>
+              </div>
+              <div class="entreprise-attribut">
+                <label>Mail :</label>
+                <span *ngIf="!entreprise.editMode">{{ entreprise.mail }}</span>
+                <div *ngIf="entreprise.editMode">
+                  <form [formGroup]="entrepriseForm">
+                    <input type="email" formControlName="mail" />
+                  </form>
+                </div>
+              </div>
+            <div class="entreprise-attribut">
+              <label>Site :</label>
+              <span *ngIf="!entreprise.editMode">{{ entreprise.site }}</span>
+              <div *ngIf="entreprise.editMode">
+                <form [formGroup]="entrepriseForm">
+                  <input type="text" formControlName="site" />
+                </form>
+              </div>
+            </div>
+             <div class="entreprise-attribut">
+                <label>Note :</label>
+                <span *ngIf="!entreprise.editMode">{{ entreprise.note }}</span>
+                <div *ngIf="entreprise.editMode">
+                  <form [formGroup]="entrepriseForm">
+                    <input type="text" formControlName="note" />
+                  </form>
+                </div>
+              </div>
+            <div class="entreprise-actions">
+              <button class="modifier" (click)="showForm(entreprise)" *ngIf="!entreprise.editMode">Modifier</button>
+              <!-- <button class="supprimer" (click)="deleteEntreprise(entreprise)" *ngIf="!entreprise.editMode">Supprimer</button> -->
+              <!-- <button class="sauvegarder" (click)="updateEntreprise(entreprise.id)" *ngIf="entreprise.editMode">Sauvegarder</button> -->
+              <button class="annuler" (click)="cancelEdit(entreprise)" *ngIf="entreprise.editMode">Annuler</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
